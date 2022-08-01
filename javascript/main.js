@@ -26,7 +26,7 @@ class ProductoCarrito {
 }
 
 async function obtenerJson() {
-    const response = await fetch("../json/productos.json")
+    const response = await fetch("./json/productos.json")
     const data = await response.json()
 
     data.forEach((prod) => {
