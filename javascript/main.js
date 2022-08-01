@@ -26,12 +26,16 @@ class ProductoCarrito {
 }
 
 async function obtenerJson() {
+    try{
     const response = await fetch("./json/productos.json")
     const data = await response.json()
 
     data.forEach((prod) => {
         listaProductos.push(new Producto(prod.id, prod.nombre, prod.codigo, prod.tipo, prod.precio, prod.imagen))
     })
+} catch{
+    console.log("error no se pudo cargar productos reintente" );
+}
 }
 
 //---------------------------------- ALERTAS----------------------------------
