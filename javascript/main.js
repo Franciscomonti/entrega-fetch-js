@@ -140,9 +140,6 @@ function agregarCarrito(id) {
     contadorCarritoModal()
 
     contadorCarritoTotal()
-
-
-
 }
 
 function eliminarCarrito(id) {
@@ -193,6 +190,13 @@ function crearCardCarrito(producto) {
 
 }
 
+function contadorCarrito() {
+    let contadorCar = document.getElementById("contador-Cart")
+    contadorCar.innerHTML = `${carrito.length}`
+}
+
+//Modal Carrito cantidad producto y totales
+
 function cantidadProductos(id) {
     let encontrar = carrito.find(prod => prod.producto.id == id)
 
@@ -218,11 +222,6 @@ function contadorCarritoModal() {
     }
 
     contadorCarModal.innerHTML = `${total}`
-}
-
-function contadorCarrito() {
-    let contadorCar = document.getElementById("contador-Cart")
-    contadorCar.innerHTML = `${carrito.length}`
 }
 
 
@@ -273,6 +272,7 @@ function agregarFavorito(id) {
     favoritos.push(productoSelecFav)
 
     document.getElementById(productoSelecFav.id).src = "./img/icon/fav black.svg";
+
     let cardFav = document.querySelector("#modal-contenedor");
     cardFav.innerHTML += crearCardFav(productoSelecFav);
 
@@ -453,7 +453,6 @@ function colorBtnFiltro(element, tipo) {
     }
     element.style.color = "red"
 }
-
 
 
 //------------------------------------STORAGE------------------------------------------
