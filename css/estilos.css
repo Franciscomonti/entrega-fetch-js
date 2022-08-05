@@ -328,17 +328,23 @@ body .modal {
           align-items: center;
 }
 
+body .modal .modal-cerrar2,
+body .modal .modal-cerrar {
+  width: 60%;
+  height: 100vh;
+}
+
 body .modal .modal-externo {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 50%;
-  height: 80%;
-  margin: auto;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  width: 40%;
+  min-height: 100vh;
+  margin: auto 0px auto auto;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -352,17 +358,6 @@ body .modal .modal-externo {
           box-shadow: 0px 0px 50px grey;
   overflow: scroll;
   overflow-x: hidden;
-}
-
-body .modal .modal-externo .modal-cerrar2 {
-  padding: 5px;
-  margin: 4px;
-  position: absolute;
-  font-size: 20px;
-  color: red;
-  cursor: pointer;
-  top: 5px;
-  right: 5px;
 }
 
 body .modal .modal-externo .modal-cerrar {
@@ -461,7 +456,7 @@ body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-c
   color: red;
 }
 
-body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito-cantidad {
+body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito-modal-contador {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -471,16 +466,8 @@ body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito
           justify-content: space-between;
 }
 
-body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito-cantidad .btn-mas {
-  font-size: 20px;
-}
-
-body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito-cantidad .btn-cantidad {
-  font-size: 20px;
-}
-
-body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito-cantidad .btn-menos {
-  font-size: 20px;
+body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .carrito-modal-contador P {
+  cursor: pointer;
 }
 
 body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-card-accion {
@@ -512,5 +499,56 @@ body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-c
   padding: 3px 10px;
   color: blue;
   cursor: pointer;
+}
+
+body .modal .modal-externo .footer-modal {
+  position: relative;
+  z-index: 100;
+  background-color: white;
+  bottom: 0px;
+  right: 0px;
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 50px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  border-top: 1px solid black;
+  margin-top: 20px;
+}
+
+body .modal .modal-externo .footer-modal .footer-modal-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body .modal .modal-externo .footer-modal .footer-modal-btn p, body .modal .modal-externo .footer-modal .footer-modal-btn .vaciar-carrito {
+  margin: 10px;
+  padding: 5px 10px;
+  color: blue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: 0px 0px 10px black;
+          box-shadow: 0px 0px 10px black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body .modal .modal-externo .footer-modal .footer-modal-btn .vaciar-carrito {
+  color: red;
 }
 /*# sourceMappingURL=estilos.css.map */

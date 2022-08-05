@@ -266,7 +266,7 @@ body {
                         display: flex;
                         justify-content: space-between;
                         width: 100%;
-                        
+
 
                         .btn-carrito {
                             color: blue;
@@ -292,13 +292,19 @@ body {
         justify-content: center;
         align-items: center;
 
+        .modal-cerrar2,
+        .modal-cerrar {
+            width: 60%;
+            height: 100vh;
+        }
+
         .modal-externo {
             position: relative;
             display: flex;
-            width: 50%;
-            height: 80%;
-            margin: auto;
-            justify-content: center;
+            width: 40%;
+            min-height: 100vh;
+            margin: auto 0px auto auto;
+            justify-content: space-between;
             align-items: center;
             flex-direction: column;
             background-color: white;
@@ -306,17 +312,6 @@ body {
             box-shadow: 0px 0px 50px grey;
             overflow: scroll;
             overflow-x: hidden;
-
-            .modal-cerrar2 {
-                padding: 5px;
-                margin: 4px;
-                position: absolute;
-                font-size: 20px;
-                color: red;
-                cursor: pointer;
-                top: 5px;
-                right: 5px;
-            }
 
             .modal-cerrar {
                 padding: 5px;
@@ -386,22 +381,12 @@ body {
                             }
                         }
 
-                        .carrito-cantidad{
+                        .carrito-modal-contador {
                             display: flex;
                             width: 50px;
                             justify-content: space-between;
-
-                            .btn-mas{
-                                font-size: 20px;
-
-                            }
-                            .btn-cantidad{
-                                font-size: 20px;
-
-                            }
-                            .btn-menos{
-                                font-size: 20px;
-
+                            P{
+                                cursor: pointer;
                             }
                         }
 
@@ -428,6 +413,48 @@ body {
                             }
                         }
                     }
+                }
+
+
+            }
+
+            .footer-modal {
+                position: relative;
+                z-index: 100;
+                background-color: white;
+                bottom: 0px;
+                right: 0px;
+                width: 50%;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                padding: 20px 50px;
+                align-items: flex-end;
+                border-top: 1px solid black;
+                margin-top: 20px;
+
+                .footer-modal-detalle {
+                    
+                }
+
+                .footer-modal-btn {
+                    display: flex;
+                    p, .vaciar-carrito {
+                        margin: 10px;
+                        padding: 5px 10px;
+                        color: blue;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0px 0px 10px black;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .vaciar-carrito{
+                        color: red;
+                    }
+
                 }
             }
         }

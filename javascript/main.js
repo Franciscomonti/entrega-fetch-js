@@ -1,4 +1,3 @@
-
 let listaProductos = [];
 let carrito = []
 let favoritos = []
@@ -26,16 +25,16 @@ class ProductoCarrito {
 }
 
 async function obtenerJson() {
-    try{
-    const response = await fetch("./json/productos.json")
-    const data = await response.json()
+    try {
+        const response = await fetch("./json/productos.json")
+        const data = await response.json()
 
-    data.forEach((prod) => {
-        listaProductos.push(new Producto(prod.id, prod.nombre, prod.codigo, prod.tipo, prod.precio, prod.imagen))
-    })
-} catch{
-    console.log("error no se pudo cargar productos reintente" );
-}
+        data.forEach((prod) => {
+            listaProductos.push(new Producto(prod.id, prod.nombre, prod.codigo, prod.tipo, prod.precio, prod.imagen))
+        })
+    } catch {
+        console.log("error no se pudo cargar productos reintente");
+    }
 }
 
 //---------------------------------- ALERTAS----------------------------------
@@ -138,6 +137,12 @@ function agregarCarrito(id) {
 
     contadorCarrito()
 
+    contadorCarritoModal()
+
+    contadorCarritoTotal()
+
+
+
 }
 
 function eliminarCarrito(id) {
@@ -154,6 +159,10 @@ function eliminarCarrito(id) {
     alertToast("Producto eliminado correctamente", "red")
 
     contadorCarrito()
+
+    contadorCarritoModal()
+
+    contadorCarritoTotal()
 }
 
 function crearCardCarrito(producto) {
@@ -168,6 +177,9 @@ function crearCardCarrito(producto) {
                 <h4>${producto.codigo}</h4>
                 <h3>$ ${producto.precio}</h3>
             </div>
+            <div class="carrito-modal-contador">
+                <input type="number" id="quantity-${producto.id}" onchange="cantidadProductos(${producto.id})" name="quantity" min="1" max="5" value="1" >
+            </div>
 
             <div class="modal-card-accion">
                 <h2 class="btn-agregar">Comprar</h2>
@@ -176,13 +188,74 @@ function crearCardCarrito(producto) {
         </div>
     </div>
     `;
+
     return cardCreada
+
+}
+
+function cantidadProductos(id) {
+    let encontrar = carrito.find(prod => prod.producto.id == id)
+
+    let valorCantidad = document.querySelector(`#quantity-${id}`).value;
+
+    encontrar.cantidad = valorCantidad
+
+    let valorHtml = document.querySelector(`#quantity-${id}`)
+    valorHtml.setAttribute('value', valorCantidad)
+
+    contadorCarritoTotal()
+
+    contadorCarritoModal()
+}
+
+function contadorCarritoModal() {
+    let contadorCarModal = document.getElementById("contador-Cart-modal")
+
+    let total = 0
+
+    for (let productoCarrito of carrito) {
+        total += parseInt(productoCarrito.cantidad)
+    }
+
+    contadorCarModal.innerHTML = `${total}`
 }
 
 function contadorCarrito() {
     let contadorCar = document.getElementById("contador-Cart")
     contadorCar.innerHTML = `${carrito.length}`
 }
+
+
+function contadorCarritoTotal() {
+    let contadorCar = document.getElementById("total-cart-modal")
+
+    let total = 0
+    for (let productoCarrito of carrito) {
+        total += productoCarrito.producto.precio * productoCarrito.cantidad
+    }
+
+    contadorCar.innerHTML = `${total}`
+}
+
+//vaciar carrito 
+
+var vaciarCarrito = document.getElementById("vaciar-carrito");
+
+vaciarCarrito.onclick = function () {
+    let carritoHtml = document.getElementById("carrito")
+    carritoHtml.innerHTML = ""
+
+    carrito = []
+
+    removerProductoLocalStorage("localCarrito")
+
+    contadorCarrito()
+
+    contadorCarritoModal()
+
+    contadorCarritoTotal()
+}
+
 
 //---------------------------------------------------FAVORITOS-------------------------------------------------
 
@@ -265,6 +338,8 @@ var btnCloseModalFavorito = document.getElementsByClassName("modal-cerrar")[0];
 
 btnModalFavorito.onclick = function () {
     modalFavorito.style.display = "flex";
+
+    cantProd()
 }
 
 btnCloseModalFavorito.onclick = function () {
@@ -279,6 +354,7 @@ var btnCloseModalCarrito = document.getElementsByClassName("modal-cerrar2")[0];
 
 btnModalCarrito.onclick = function () {
     modalCarrito.style.display = "flex";
+
 }
 
 btnCloseModalCarrito.onclick = function () {
@@ -354,18 +430,18 @@ let btnFiltroMenor = document.getElementById("filtroMenor")
 
 btnFiltroMayor.onclick = function () {
     colorBtnFiltro(this, "filtroPrecio")
-    let filtradosCosto = filtrados.sort((a, b) => {
+    filtrados.sort((a, b) => {
         return b.precio - a.precio;
     });
-    crearCardsMain(filtradosCosto)
+    crearCardsMain(filtrados)
 }
 
 btnFiltroMenor.onclick = function () {
     colorBtnFiltro(this, "filtroPrecio")
-    let filtradosCosto = filtrados.sort((a, b) => {
+    filtrados.sort((a, b) => {
         return a.precio - b.precio;
     });
-    crearCardsMain(filtradosCosto)
+    crearCardsMain(filtrados)
 }
 
 //Color btn de filtro
@@ -423,7 +499,6 @@ function inciarLocalStorage() {
 }
 
 
-
 //----------------------------- MAIN-Inicializar-------------------------------
 
 function main() {
@@ -431,8 +506,9 @@ function main() {
         .then(response => {
             inciarLocalStorage()
             crearCardsMain(filtrados)
-        }
-        )
+            contadorCarritoTotal()
+            contadorCarritoModal()
+        })
 }
 
 main()
